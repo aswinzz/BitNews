@@ -142,6 +142,77 @@ newsapi.articles({
 });
 
 
+router.get('/education', function(req, res, next) {
+	let NewsAPI = require('newsapi');
+ 
+let newsapi = new NewsAPI('e03aa59888c949099e40b3f09b961f6a');
+ 
+// To query articles: 
+newsapi.articles({
+  source: 'edunews', // required 
+  sortBy: 'latest' // optional 
+}).then(articlesResponse => {
+	
+		console.log(articlesResponse);
+
+  newsapi.articles({
+  source: 'google-news', // required 
+  sortBy: 'top' // optional 
+}).then(topresponses => {
+  console.log(topresponses);
+  /*
+    {
+      status: "ok",
+      source: "associated-press",
+      sortBy: "top",
+      articles: [
+        ...
+      ]
+    }
+   */
+    newsapi.articles({
+  source: 'the-hindu', // required 
+  sortBy: 'top' // optional 
+}).then(slider => {
+  console.log(slider);
+  /*
+    {
+      status: "ok",
+      source: "associated-press",
+      sortBy: "top",
+      articles: [
+        ...
+      ]
+    }
+   */
+
+   res.render('ducation', { title: 'Express',article:articlesResponse.articles,top:topresponses.articles,slider:slider.articles});
+
+});
+   
+
+});
+
+  
+  /*
+    {
+      status: "ok",
+      source: "associated-press",
+      sortBy: "top",
+      articles: [
+        ...
+      ]
+    }
+   */
+});
+
+
+
+  
+});
+
+
+
 router.get('/finance', function(req, res, next) {
 	let NewsAPI = require('newsapi');
  
